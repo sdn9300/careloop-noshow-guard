@@ -1,0 +1,49 @@
+# CareLoop Clinics - No-Show Guard
+# Environment & Credential Protections
+
+# Environment variables & API keys (Strict prohibition of credentials)
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+api_key.txt
+
+# Python & Jupyter artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Distribution & build artifacts
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Database local caches
+*.sqlite3
+*.db

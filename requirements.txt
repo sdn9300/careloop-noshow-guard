@@ -1,0 +1,11 @@
+# CareLoop Clinics - No-Show Guard
+# Core Dependencies & Exact Environment Specifications
+
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.5.0
+pydantic>=2.7.0
+requests>=2.31.0
+google-genai>=0.1.1
+ipykernel
+jupyter

@@ -1,0 +1,31 @@
+note_id,appointment_id,note_text
+N001,A0001,Patient stated they completely forgot about the visit because no reminder message was received.
+N002,A0002,Severe traffic congestion and cab breakdown prevented patient from travelling 18 km to the clinic.
+N003,A0003,Patient mentioned the consultation fee of Rs 800 was unaffordable this month and asked for discount.
+N004,A0004,
+N005,A0005,"Medical emergency in family, patient's child fell acutely ill with high fever and required home care."
+N006,A0006,Unexpected urgent office meeting and work schedule change forced patient to stay at work.
+N007,A0007,"Patient bola ki reminder nahi mila tha so forgot ho gaya date, agle hafte book karenge."
+N008,A0008,Heavy rainfall and flooded roads made public transit impossible to reach the facility.
+N009,A0009,Patient was vague and cited personal private reasons without specifying any clear issue.
+N010,A0010,Patient suffered sudden acute viral fever and physician advised bed rest.
+N011,A0011,Patient did not check calendar and forgot the time slot.
+N012,A0012,Metro was delayed and patient could not reach the clinic in time.
+N013,A0013,Patient requested postponing due to tight financial budget before payday.
+N014,A0014,Patient experienced severe migraine attack and could not travel.
+N015,A0015,Mandatory company shift work assignment conflicted with appointment time.
+N016,A0016,Patient moved out of town temporarily.
+N017,A0017,Patient's car broke down halfway through the commute.
+N018,A0018,Misplaced appointment slip and did not remember doctor's timing.
+N019,A0019,"Fee exceeded expectations, patient decided to seek local generic dispensary."
+N020,A0020,Urgent client presentation scheduled at the same hour.
+N021,A0021,Patient did not check calendar and forgot the time slot.
+N022,A0022,Metro was delayed and patient could not reach the clinic in time.
+N023,A0023,Patient requested postponing due to tight financial budget before payday.
+N024,A0024,Patient experienced severe migraine attack and could not travel.
+N025,A0025,Mandatory company shift work assignment conflicted with appointment time.
+N026,A0026,Patient moved out of town temporarily.
+N027,A0027,Patient's car broke down halfway through the commute.
+N028,A0028,Misplaced appointment slip and did not remember doctor's timing.
+N029,A0029,"Fee exceeded expectations, patient decided to seek local generic dispensary."
+N030,A0030,Urgent client presentation scheduled at the same hour.
