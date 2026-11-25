@@ -71,23 +71,31 @@ Raw Data Pack (appointments.csv, clinics.csv, followup_notes.csv)
 
 * **Part 1 (Data Foundations):** Ingested 1,020 raw bookings and isolated 32 invalid rows; cleaning, deduplication, and outlier capping yielded 990 verified appointments with an overall baseline no-show rate of 22.0% (218 no-shows).
 * **Part 2 (SQL Analytics):** SQL aggregations revealed that no-show risk escalates dramatically with lead time, jumping from 16.2% for 1–7 day bookings to 60.5% for appointments booked 31+ days in advance.
-* **Part 3 (Machine Learning):** Logistic Regression achieved the highest cross-validated ROC-AUC (0.77); tuning the decision threshold to 0.35 maximized recall (0.57) and identified that sending reminders is associated with an approximate 69% reduction in no-show odds (Odds Ratio = 0.31).
+* **Part 3 (Machine Learning):** Logistic Regression delivered the highest generalization test ROC-AUC (0.858 vs 0.824 for Random Forest); optimizing the operational threshold to 0.35 boosted test recall to 61.2% (capturing 30 of 49 test no-shows) and identified that sending reminders is associated with an unscaled odds ratio of 0.42 (a ~57.7% reduction in no-show odds, holding other features constant).
 * **Part 4 (Generative AI):** Automated analysis of follow-up notes via Gemini Flash and Pydantic revealed that 100% of patients who cited forgetting their appointment had not received an automated reminder (`reminder_sent = No`).
 
 ---
 
 ## 4. Executive Business Recommendation
 
-CareLoop Clinics should immediately execute a targeted, two-pronged operational intervention focused on advance bookings and systematic communication. First, because patients booking more than 30 days ahead exhibit a prohibitive **60.5% no-show rate** (compared to **16.2%** for 1–7 day bookings), CareLoop must institute automated SMS/WhatsApp reminder sequences at 7 days and 24 hours prior to the appointment; empirical modeling shows that sending reminders is associated with a **69% reduction in no-show odds** ($\text{Odds Ratio} = 0.31$, holding other features constant), and all follow-up notes citing forgetfulness belonged to unreminded patients. Second, clinic managers should deploy the Logistic Regression risk scoring model each evening using the optimized **0.35 probability threshold** (ROC-AUC $\approx 0.79$, Recall $\approx 0.57$). This flags approximately **25%** of daily scheduled patients (around 49 patients in our test cohort) for personalized 1-minute front-desk phone calls, directly addressing the operational cost asymmetry where an empty doctor slot far outweighs the nominal expense of an evening telephone check-in. High-risk clinics such as Hadapsar (**27.3%** no-shows) and Malviya Nagar (**26.8%** no-shows) should be prioritized for immediate workflow deployment.
+CareLoop Clinics should immediately execute a targeted, two-pronged operational intervention focused on advance bookings and systematic communication. First, because patients booking more than 30 days ahead exhibit a prohibitive **60.5% no-show rate** (compared to **16.2%** for 1–7 day bookings), CareLoop must institute automated SMS/WhatsApp reminder sequences at 7 days and 24 hours prior to the appointment; empirical modeling demonstrates that sending reminders is associated with a **57.7% reduction in no-show odds** ($\text{Odds Ratio} = 0.42$, holding other features constant), and 100% of analyzed notes citing forgetfulness belonged to unreminded patients. Second, clinic managers should deploy the Logistic Regression risk scoring model each evening using the optimized **0.35 probability threshold** (held-out test ROC-AUC $= 0.858$, Recall $= 0.612$, Precision $= 0.612$). This flags approximately **24.7%** of daily scheduled patients (exactly 49 patients in our 198-patient test cohort) for personalized 1-minute front-desk telephone check-ins, directly addressing the operational cost asymmetry where an empty doctor slot far outweighs the nominal expense of an evening phone call. High-risk clinics such as Hadapsar (**27.3%** no-shows) and Malviya Nagar (**26.8%** no-shows) should be prioritized for immediate workflow deployment.
 
 ---
 
 ## 5. Model Selection & Threshold Justification
 
 * **Chosen Model:** **Logistic Regression** (with `StandardScaler` inside a cross-validation pipeline).
-* **Cross-Validated ROC-AUC:** **0.77** on 5-fold training cross-validation (matching the tuned Random Forest while offering full interpretability and superior calibration). Held-out test set ROC-AUC: **0.789**.
+* **Cross-Validation vs. Test Generalization:** 
+  * On 5-fold training cross-validation, default Random Forest achieved ROC-AUC **0.8555** (tuned: **0.8544**) and Logistic Regression achieved **0.8157** (pruned Decision Tree: **0.7417**).
+  * However, Random Forest exhibited severe memorization/overfitting (1.0000 training accuracy vs 0.8182 test accuracy).
+  * On the unseen held-out test set, **Logistic Regression achieved the highest generalization ROC-AUC across all models (0.8577 vs. 0.8237 for Random Forest and 0.6844 for Decision Tree)**.
+  * In addition, Logistic Regression provides direct mathematical interpretability (unscaled Odds Ratio of 0.42 for reminders and +0.59 coefficient for prior cancellations) and calibrated probabilities essential for clinic operational thresholds.
 * **Chosen Threshold:** **0.35** (over the standard default of 0.50).
-* **Justification:** At threshold 0.50, out-of-fold recall was severely restricted to $\approx 25\%$ (missing 3 out of 4 no-shows). At threshold 0.35, training F1 increased from 0.35 to 0.49 and recall nearly doubled to $47\%$ ($57\%$ on test set). In a healthcare outpatient clinic, a missed warning results in an unutilized 15–30 minute consultation slot and lost fee revenue, whereas an extra check-in call costs only 1 minute of front desk staff time.
+* **Justification:** 
+  * At threshold 0.50, out-of-fold training recall was severely restricted to **33.1%** (0.3314, F1 = 0.4462, 82 flagged), missing two out of three no-shows.
+  * At threshold 0.35, training F1 increased to **0.5617** and training recall jumped to **53.8%** (0.5385, 155 flagged).
+  * On the unseen hold-out test set, threshold 0.35 achieved **61.2% Recall** (0.6122, capturing 30 of 49 no-shows) and **61.2% Precision** (0.6122), flagging exactly **49 of 198 patients** (24.7%).
+  * In outpatient healthcare, a missed warning results in an unrecoverable 15–30 minute empty doctor slot and lost fee revenue, whereas an extra check-in call costs only 1 minute of front-desk administrative time.
 
 ---
 
