@@ -2,7 +2,7 @@
 > **From raw bookings to a risk model and an AI-assisted follow-up review**  
 > *IIT Roorkee & Masai School — Data Science & AI Capstone Project*
 
-**Public Repository URL:** `https://github.com/<your-username>/careloop-noshow-guard` *(Update with actual repo URL)*
+**Public Repository URL:** https://github.com/sdn9300/careloop-noshow-guard
 
 ---
 
@@ -128,7 +128,7 @@ CareLoop Clinics should immediately execute a targeted, two-pronged operational 
 ### Local Environment Setup
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/careloop-noshow-guard.git
+git clone https://github.com/sdn9300/careloop-noshow-guard.git
 cd careloop-noshow-guard
 
 # Create and activate virtual environment
