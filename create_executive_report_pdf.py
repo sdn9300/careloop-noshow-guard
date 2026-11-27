@@ -41,7 +41,7 @@ class NumberedCanvas(canvas.Canvas):
         self.setStrokeColor(colors.HexColor("#CBD5E0"))
         self.setLineWidth(0.6)
         self.line(36, 40, 576, 40)
-        self.drawString(36, 28, "IIT Roorkee & Masai School — Data Science & AI Capstone | CareLoop Health Network")
+        self.drawString(36, 28, "CareLoop Clinics — No-Show Guard | Outpatient Data Science & GenAI Operations")
         page_text = f"Page {self._pageNumber} of {page_count}"
         self.drawRightString(576, 28, page_text)
         self.restoreState()
@@ -172,7 +172,7 @@ def build_pdf():
 
     # Executive Summary Box
     summary_html = """<b>EXECUTIVE SUMMARY & CORE STRATEGIC TAKEAWAYS:</b><br/>
-    CareLoop Clinics operates eight outpatient healthcare facilities across six Indian cities, experiencing a baseline appointment no-show rate of <b>22.0% (218 / 990 appointments)</b>. Empty doctor slots idle clinical staff, forfeit consultation fee revenues, and deny timely care to patients on waiting lists. This capstone engineering engagement implemented an end-to-end data intelligence system spanning data cleaning with live weather enrichment, relational SQL analytics, supervised machine learning, and generative AI note synthesis.<br/>
+    CareLoop Clinics operates eight outpatient healthcare facilities across six Indian cities, experiencing a baseline appointment no-show rate of <b>22.0% (218 / 990 appointments)</b>. Empty doctor slots idle clinical staff, forfeit consultation fee revenues, and deny timely care to patients on waiting lists. This end-to-end engineering engagement implemented a comprehensive data intelligence system spanning data cleaning with live weather enrichment, relational SQL analytics, supervised machine learning, and generative AI note synthesis.<br/>
     • <b>Advance Lead Time Risk Escalation:</b> No-show rates jump from <b>16.2%</b> for bookings made 1–7 days in advance to <b>60.5%</b> for appointments scheduled 31+ days ahead.<br/>
     • <b>Machine Learning Model Superiority:</b> Standardized Logistic Regression achieved superior test generalization (<b>ROC-AUC = 0.8577</b> vs 0.8237 for default Random Forest). Automated reminders confer an unscaled odds ratio of <b>0.4234</b> (~57.7% lower no-show odds, holding other features constant).<br/>
     • <b>Operating Threshold Optimization (0.35):</b> Prioritizing clinical recall over the standard 0.50 threshold catches <b>61.2% of test no-shows</b> (and <b>73.3% in chronological future validation</b>) while flagging only 24.7% of daily appointment volume for 1-minute front-desk phone confirmations.<br/>
@@ -422,7 +422,7 @@ def build_pdf():
     # Sign-off box
     signoff_text = """<b>PROJECT SIGN-OFF & METRIC CERTIFICATION:</b><br/>
     All analytical metrics, regression parameters, SQL calculations, and machine learning outputs in this document are strictly reproducible via the public open-source project repository: <b>https://github.com/sdn9300/careloop-noshow-guard</b>.<br/>
-    <i>Data Provenance: Controlled synthetic outpatient benchmark dataset calibrated to realistic Indian clinical operations per IIT Roorkee & Masai School specifications, enriched with live weather telemetry from Open-Meteo REST API.</i>
+    <i>Data Provenance: Controlled synthetic outpatient benchmark dataset calibrated to realistic Indian clinical operations, enriched with live weather telemetry from Open-Meteo REST API.</i>
     """
     t_sign = Table([[Paragraph(signoff_text, body_style)]], colWidths=[540])
     t_sign.setStyle(TableStyle([

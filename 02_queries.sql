@@ -1,11 +1,11 @@
 -- ==============================================================================
 -- CareLoop Clinics: No-Show Guard
 -- Part 2: Relational Analytics & SQL Queries (02_queries.sql)
--- Course: IIT Roorkee & Masai School — Data Science & AI Capstone
+-- Module: Relational Database Schema & Clinical Attendance Analytics
 -- ==============================================================================
 
 -- ------------------------------------------------------------------------------
--- Task 2.1: Build and load the database (4 marks)
+-- Task 2.1: Build and load the database
 -- ------------------------------------------------------------------------------
 -- Note: Skip CREATE DATABASE / USE lines if running on SQLiteOnline
 CREATE DATABASE IF NOT EXISTS noshowguard;
@@ -74,7 +74,7 @@ Error: UNIQUE constraint failed: appointments.appointment_id
 
 
 -- ------------------------------------------------------------------------------
--- Task 2.2: No-show rate by clinic (5 marks)
+-- Task 2.2: No-show rate by clinic
 -- ------------------------------------------------------------------------------
 
 -- Query 2.2.A: High-volume clinics only (HAVING count >= 95), sorted by no_show_pct DESC
@@ -108,7 +108,7 @@ ORDER BY no_show_pct DESC;
 
 
 -- ------------------------------------------------------------------------------
--- Task 2.3: Does booking far ahead matter? (4 marks)
+-- Task 2.3: Does booking far ahead matter?
 -- ------------------------------------------------------------------------------
 -- Categorizes lead days into four distinct operational bands using CASE WHEN.
 -- Upper limits inclusive: 7, 14, and 30 belong to the lower band.
@@ -131,7 +131,7 @@ ORDER BY MIN(lead_days) ASC;
 
 
 -- ------------------------------------------------------------------------------
--- Task 2.4: Month-by-month trend (4 marks)
+-- Task 2.4: Month-by-month trend
 -- ------------------------------------------------------------------------------
 -- Uses CTE 'monthly' and LAG() window function to calculate month-over-month rate deltas.
 -- Expected: 2025-01 (157 / 24.8% / NULL), 2025-02 (151 / 20.5% / -4.3),
@@ -155,7 +155,7 @@ ORDER BY month ASC;
 
 
 -- ------------------------------------------------------------------------------
--- Task 2.5: Rank clinics inside each city (5 marks)
+-- Task 2.5: Rank clinics inside each city
 -- ------------------------------------------------------------------------------
 -- Partitions by city using RANK() and compares clinic rate against corporate overall rate (22.02%).
 -- Expected ranking:

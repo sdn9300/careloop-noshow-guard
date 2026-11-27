@@ -1,6 +1,6 @@
 # CareLoop Clinics: No-Show Guard
 > **From raw bookings to an interpretable risk model and an AI-assisted follow-up review**  
-> *IIT Roorkee & Masai School — Data Science & AI Capstone Project*
+> *End-to-End Healthcare Data Science, Machine Learning & Generative AI Pipeline*
 
 **Public Repository URL:** https://github.com/sdn9300/careloop-noshow-guard  
 **Executive Report PDF:** [CareLoop_NoShowGuard_Executive_Report.pdf](CareLoop_NoShowGuard_Executive_Report.pdf)
@@ -28,7 +28,7 @@ Risk scores are generated on the **evening before the appointment** (after that 
 
 ### Data Provenance & Simulated Business Context
 * **Simulated Healthcare Network:** CareLoop Clinics is a simulated outpatient network designed to model realistic operational dynamics, consultation fees, and patient scheduling behavior across Indian Tier-1 and Tier-2 clinical facilities.
-* **Controlled Synthetic Benchmark:** The core appointment booking logs (`appointments.csv`), clinic master profiles (`clinics.csv`), and unstructured qualitative call-centre notes (`followup_notes.csv`) are controlled synthetic benchmark datasets calibrated to project specifications established by IIT Roorkee and Masai School.
+* **Controlled Synthetic Benchmark:** The core appointment booking logs (`appointments.csv`), clinic master profiles (`clinics.csv`), and unstructured qualitative call-centre notes (`followup_notes.csv`) are controlled synthetic benchmark datasets calibrated to realistic Indian outpatient clinic scheduling dynamics and operational constraints.
 * **Live Environmental Telemetry:** In Part 1 (Task 1.5), clinic latitude and longitude coordinates were coupled with live, real-time ambient weather telemetry queried via REST API from the **Open-Meteo API**, enriching clinic master records (`clinics_enriched.csv`) with live ambient temperature (°C).
 
 ---
@@ -174,7 +174,7 @@ Recall: 34.7% (17 of 49 caught)        Recall: 61.2% (30 of 49 caught - 76% more
 To verify that the model's high predictive power is methodologically robust and free of subtle data leakage, two advanced validation studies were implemented in `03_model.ipynb` (Task 3.6):
 
 ### Experiment A: Strict Leak-Free Pipeline (Train-Only Preprocessing)
-* **Rationale:** In standard exploratory capstones, missing value imputation (median age, median distance) and Tukey IQR outlier fences are often calculated across the full dataset prior to splitting. While common in coursework, in production this creates subtle look-ahead leakage.
+* **Rationale:** In initial exploratory modeling, missing value imputation (median age, median distance) and Tukey IQR outlier fences are often calculated across the full dataset prior to splitting. In production, however, this creates subtle look-ahead leakage.
 * **Method:** The raw dataset (`data/appointments.csv`) was split into 80% train and 20% test *prior to any data cleaning*. Imputation medians (Train Age: 48.0, Train Distance: 8.10 km) and Tukey upper fences (Distance: 28.51 km, Fee: INR 1,008.38) were computed **strictly on training observations** and transformed onto the test set.
 * **Results:** Logistic Regression achieved a **Test ROC-AUC of 0.8619** (compared to 0.8577 in the baseline pipeline). At threshold 0.35, Precision was 0.5918, Recall was 0.5918, and 49 patients were flagged. This confirms that pre-split data cleaning introduced zero artificial inflation.
 

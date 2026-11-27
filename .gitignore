@@ -47,3 +47,7 @@ desktop.ini
 # Database local caches
 *.sqlite3
 *.db
+
+# Reference source briefs / unrelated PDFs
+project_brief.pdf
+readme.pdf
